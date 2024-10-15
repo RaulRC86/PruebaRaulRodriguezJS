@@ -29,27 +29,75 @@ async function llenarSelectConMonedas() {
 async function convertirMoneda() {
   const valorCLP = Number(document.querySelector("#monedasInput").value);
   const selectMoneda = document.querySelector("#moneda");
-  const monedaSeleccionada = selectMoneda.value;
-
+  const valorMonedaSeleccionada = selectMoneda.value;
   const resultadoDiv = document.querySelector("#resultado");
 
-  if (valorCLP && monedaSeleccionada) {
+  if (valorCLP && valorMonedaSeleccionada) {
     const monedas = await getMonedas();
-    const valorMonedaSeleccionada = monedas[monedaSeleccionada].valor;
+    const valorMoneda = monedas[valorMonedaSeleccionada].valor;
 
-    if (valorMonedaSeleccionada) {
-      const resultado = valorCLP / valorMonedaSeleccionada;
-      resultadoDiv.innerHTML = `Resultado: $${resultado.toFixed(2)} ${monedas[
-        monedaSeleccionada
-      ].codigo.toUpperCase()}`;
-    } else {
-      resultadoDiv.innerHTML =
-        "No se pudo obtener la tasa de la moneda seleccionada.";
-    }
+    const resultado = valorCLP / valorMoneda;
+    resultadoDiv.innerHTML = `Resultado: $${resultado.toFixed(
+      2
+    )} en la moneda seleccionada.`;
+
+    actualizarGrafico(valorMonedaSeleccionada);
   } else {
     resultadoDiv.innerHTML =
       "Por favor ingresa un valor en CLP y selecciona una moneda.";
   }
 }
-
 llenarSelectConMonedas();
+
+async function getHistoricoMoneda(moneda) {
+  try {
+    const endpoint = `https://mindicador.cl/api/${moneda}`;
+    const res = await fetch(endpoint);
+    const data = await res.json();
+    return data.serie.slice(0, 10);
+  } catch (e) {
+    const error = document.querySelector("#error");
+    error.innerHTML = "¡Algo salió mal!";
+  }
+}
+
+async function actualizarGrafico(moneda) {
+  const historico = await getHistoricoMoneda(moneda);
+
+  const labels = historico.map((dia) => dia.fecha);
+  const valores = historico.map((dia) => dia.valor);
+
+  if (window.miGrafico) {
+    window.miGrafico.destroy();
+  }
+
+  const ctx = document.getElementById("grafico").getContext("2d");
+  window.miGrafico = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: `Valor del ${moneda.toUpperCase()}`,
+          data: valores,
+          borderColor: "rgba(75, 192, 192, 1)",
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          fill: true,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          beginAtZero: true,
+        },
+        y: {
+          ticks: {
+            beginAtZero: false,
+          },
+        },
+      },
+    },
+  });
+}

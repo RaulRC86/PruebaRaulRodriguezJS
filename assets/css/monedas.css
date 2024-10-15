@@ -14,7 +14,9 @@ h2 {
   text-align: center;
   margin-top: 10px;
 }
-h1{font-size: 50px;}
+h1 {
+  font-size: 50px;
+}
 .conversor {
   background-color: gray;
   height: 400px;
@@ -24,7 +26,31 @@ h1{font-size: 50px;}
   flex-direction: column;
   align-items: center;
 }
-i{margin-top: 50px;}
-#monedasInput, #moneda{padding-inline: 40px; padding-block: 10px;}
-.aConvertir{display: flex; flex-direction: column; align-items: center;}
-button{padding-block: 10px; padding-inline: 50px; background-color: rgb(86, 168, 234); color: white; margin-top: 30px;}
+i {
+  margin-top: 50px;
+}
+#monedasInput,
+#moneda {
+  padding-inline: 40px;
+  padding-block: 10px;
+}
+.aConvertir {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+button {
+  padding-block: 10px;
+  padding-inline: 50px;
+  background-color: rgb(86, 168, 234);
+  color: white;
+  margin-top: 30px;
+}
+.contenedorGrafico {
+  display: flex;
+  justify-content: center;
+  width: auto;
+  height: 300px;
+  margin-block: 20px;
+  background-color: azure;
+}
