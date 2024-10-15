@@ -40,6 +40,8 @@ async function convertirMoneda() {
     resultadoDiv.innerHTML = `Resultado: $${resultado.toFixed(
       2
     )} en la moneda seleccionada.`;
+    const graficoDiv = document.querySelector(".contenedorGrafico");
+    graficoDiv.style.display = "flex";
 
     actualizarGrafico(valorMonedaSeleccionada);
   } else {

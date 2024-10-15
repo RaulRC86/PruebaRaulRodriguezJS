@@ -47,7 +47,7 @@ button {
   margin-top: 30px;
 }
 .contenedorGrafico {
-  display: flex;
+  display: none;
   justify-content: center;
   width: auto;
   height: 300px;
