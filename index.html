@@ -10,6 +10,7 @@
   </head>
   <body>
     <h1>Conversor de Monedas Nacional</h1>
+    <span id="error"></span>
 
     <div class="conversor">
       <div><h2>Pesos CLP</h2></div>
@@ -24,8 +25,15 @@
           <option value="clp">Peso Chileno (CLP)</option>
         </select>
       </div>
-      <button>Buscar</button>
+      <button onclick="convertirMoneda()">Buscar</button>
+      <i class="fa-solid fa-ellipsis fa-2x" style="color: #ffffff;"></i>
+      <div id="resultado"></div>
     </div>
+
+    <div id="grafico">
+      <canvas></canvas>
+    </div>
+ 
 
     <script src="./assets/js/monedas.js"></script>
   </body>

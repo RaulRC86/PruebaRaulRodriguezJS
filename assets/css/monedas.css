@@ -14,6 +14,7 @@ h2 {
   text-align: center;
   margin-top: 10px;
 }
+h1{font-size: 50px;}
 .conversor {
   background-color: gray;
   height: 400px;
@@ -23,6 +24,7 @@ h2 {
   flex-direction: column;
   align-items: center;
 }
+i{margin-top: 50px;}
 #monedasInput, #moneda{padding-inline: 40px; padding-block: 10px;}
 .aConvertir{display: flex; flex-direction: column; align-items: center;}
 button{padding-block: 10px; padding-inline: 50px; background-color: rgb(86, 168, 234); color: white; margin-top: 30px;}
