@@ -3,7 +3,7 @@ async function getMonedas() {
         const endpoint = "https://mindicador.cl/api/";
         const res = await fetch(endpoint);
         const data = await res.json();
-        return data; // Retorna todos los datos de la API
+        return data; 
     } catch (e) {
         const error=document.querySelector("#error")
         error.innerHTML="¡Algo salió mal!";
@@ -14,14 +14,13 @@ async function llenarSelectConMonedas() {
     const selectMoneda = document.querySelector("#moneda");
     const monedas = await getMonedas();
 
-    selectMoneda.innerHTML = ""; // Limpiamos el select para llenarlo con las monedas disponibles
+    selectMoneda.innerHTML = ""; 
 
-    // Añadimos las opciones de moneda al select
     for (let moneda in monedas) {
         if (monedas[moneda].codigo && monedas[moneda].nombre) {
             const option = document.createElement("option");
-            option.value = moneda; // 'moneda' sería algo como 'usd', 'eur'
-            option.text = monedas[moneda].nombre; // 'nombre' sería algo como 'Dólar', 'Euro'
+            option.value = moneda; 
+            option.text = monedas[moneda].nombre; 
             selectMoneda.appendChild(option);
         }
     }
